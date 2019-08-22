@@ -1,5 +1,11 @@
 # Mexico Postal Code Generator
 
+## Usage
+Set limit `0` to generate all postal codes, default is 4
+```
+./mexicocpgenerator <limit>
+```
+
 ### Dev
 ```sh
 cargo run

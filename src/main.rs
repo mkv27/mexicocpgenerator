@@ -1,7 +1,12 @@
 use std::fs::File;
 use std::io::{BufRead, BufReader, Write};
+use std::env::args;
 
 fn main() {
+    let limit: i32 = match args().nth(1) {
+        Some(x) => x.parse().unwrap(),
+        None => 4
+    };
     let file = File::open("cps.txt").unwrap();
     let mut count = 0;
     let mut created_count = 0;
@@ -13,7 +18,7 @@ fn main() {
         
         count += 1;
         if count == 1 {continue;}
-        else if count > 100 {break;}
+        else if limit > 0 && count > limit {break;}
 
         let split_value = line.unwrap();
         let split = split_value.split("|");
@@ -38,7 +43,7 @@ fn main() {
         }
         
     }
-    println!("Total from txt file: {}",count);
+    println!("Total cp from txt file: {}",count-1);
     println!("Total urban: {}",urban_count);
     println!("Total files created: {}",created_count);
 }
